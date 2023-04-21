@@ -45,6 +45,12 @@ public class UnidadAcademicaRepositoryImpl implements UnidadAcademicaRepository 
     }
 
     @Override
+    public Optional<UnidadAcademica> update(UnidadAcademica unidadAcademica) {
+        UnidadAcademicaEntity entity = mapper.toUnidadAcademicaEntity(unidadAcademica);
+        return Optional.of(mapper.toUnidadAcademica(persistence.update(entity)));
+    }
+
+    @Override
     public void delete(String codigo) {
         persistence.deleteUnidadAcademicaEntityByCodigo(codigo);
     }

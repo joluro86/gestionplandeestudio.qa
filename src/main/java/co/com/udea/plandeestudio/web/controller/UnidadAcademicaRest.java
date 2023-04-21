@@ -37,6 +37,11 @@ public class UnidadAcademicaRest {
         return new ResponseEntity<>(service.saveUnidadAcademica(unidadAcademica), HttpStatus.OK);
     }
 
+    @PutMapping
+    public ResponseEntity<UnidadAcademica> updateUnidadAcademica(@RequestBody UnidadAcademica unidadAcademica) {
+        return new ResponseEntity<>(service.updateUnidadAcademica(unidadAcademica), HttpStatus.OK);
+    }
+
     @DeleteMapping("/{codigo}")
     public ResponseEntity<Mensaje> deleteUnidadAcademicaByCodigo(@PathVariable String codigo) {
         return new ResponseEntity<>(new Mensaje( "001", "Unidad academica eliminada"), HttpStatus.OK);

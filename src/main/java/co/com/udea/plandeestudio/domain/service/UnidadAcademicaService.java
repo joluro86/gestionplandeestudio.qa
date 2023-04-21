@@ -6,6 +6,8 @@ import co.com.udea.plandeestudio.domain.model.enums.Responses;
 import co.com.udea.plandeestudio.domain.repository.UnidadAcademicaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
 
 import java.util.List;
 
@@ -37,6 +39,7 @@ public class UnidadAcademicaService {
                 });
     }
 
+    @transaccion 
     public UnidadAcademica saveUnidadAcademica(UnidadAcademica unidadAcademica) {
         return repository.save(unidadAcademica)
                 .orElseThrow( () -> {
@@ -46,6 +49,7 @@ public class UnidadAcademicaService {
                 });
     }
 
+    @transaccion 
     public boolean deleteUnidadAcademica(String codigo) {
         return repository.getUnidadAcademicaByCodigo(codigo).map(unidadAcademica -> {
             repository.delete(codigo);
@@ -55,6 +59,16 @@ public class UnidadAcademicaService {
                     Responses.NOT_DELETE_ENTITy.getCodigo(),
                     Responses.NOT_DELETE_ENTITy.getHttpStatus());
         });
+    }
+
+    @transaccion 
+    public UnidadAcademica updateUnidadAcademica(UnidadAcademica unidadAcademica) {
+        return repository.update(unidadAcademica)
+                .orElseThrow( () -> {
+                    throw new BadResponseHandler(Responses.NOT_SAVE_ENTITy.getMensaje(),
+                            Responses.NOT_SAVE_ENTITy.getCodigo(),
+                            Responses.NOT_SAVE_ENTITy.getHttpStatus());
+                });
     }
 
 }
