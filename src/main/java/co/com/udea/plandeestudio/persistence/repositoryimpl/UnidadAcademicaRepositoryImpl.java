@@ -44,11 +44,11 @@ public class UnidadAcademicaRepositoryImpl implements UnidadAcademicaRepository 
         return Optional.of(mapper.toUnidadAcademica(persistence.save(entity)));
     }
 
-    @Override
+    /*  @Override
     public Optional<UnidadAcademica> update(UnidadAcademica unidadAcademica) {
         UnidadAcademicaEntity entity = mapper.toUnidadAcademicaEntity(unidadAcademica);
         return Optional.of(mapper.toUnidadAcademica(persistence.update(entity)));
-    }
+    }*/
 
     @Override
     public void delete(String codigo) {

@@ -39,7 +39,7 @@ public class UnidadAcademicaService {
                 });
     }
 
-    @transaccion 
+    @Transactional
     public UnidadAcademica saveUnidadAcademica(UnidadAcademica unidadAcademica) {
         return repository.save(unidadAcademica)
                 .orElseThrow( () -> {
@@ -49,7 +49,7 @@ public class UnidadAcademicaService {
                 });
     }
 
-    @transaccion 
+    @Transactional 
     public boolean deleteUnidadAcademica(String codigo) {
         return repository.getUnidadAcademicaByCodigo(codigo).map(unidadAcademica -> {
             repository.delete(codigo);
@@ -61,7 +61,7 @@ public class UnidadAcademicaService {
         });
     }
 
-    @transaccion 
+     /*@Transactional 
     public UnidadAcademica updateUnidadAcademica(UnidadAcademica unidadAcademica) {
         return repository.update(unidadAcademica)
                 .orElseThrow( () -> {
@@ -69,6 +69,6 @@ public class UnidadAcademicaService {
                             Responses.NOT_SAVE_ENTITy.getCodigo(),
                             Responses.NOT_SAVE_ENTITy.getHttpStatus());
                 });
-    }
+    }*/
 
 }

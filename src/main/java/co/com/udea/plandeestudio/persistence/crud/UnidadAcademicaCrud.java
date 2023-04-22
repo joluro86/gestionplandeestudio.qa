@@ -10,4 +10,6 @@ public interface UnidadAcademicaCrud extends JpaRepository<UnidadAcademicaEntity
     Optional<UnidadAcademicaEntity> findUnidadAcademicaEntitiesByCodigo(String codigo);
 
     void deleteUnidadAcademicaEntityByCodigo(String codigo);
+
+    //void updateUnidadAcademicaEntityByCodigo(String codigo);
 }
