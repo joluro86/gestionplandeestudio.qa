@@ -2,7 +2,9 @@ package co.com.udea.plandeestudio.persistence.entity;
 
 import jakarta.persistence.*;
 
+
 @Entity
+@Table(name = "unidad_academica")
 public class UnidadAcademicaEntity {
 
     @Id
