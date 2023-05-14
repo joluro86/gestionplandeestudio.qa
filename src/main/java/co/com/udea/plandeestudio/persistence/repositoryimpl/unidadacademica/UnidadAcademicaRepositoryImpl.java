@@ -1,9 +1,10 @@
-package co.com.udea.plandeestudio.persistence.repositoryimpl;
+package co.com.udea.plandeestudio.persistence.repositoryimpl.unidadacademica;
 
 import co.com.udea.plandeestudio.domain.model.UnidadAcademica;
-import co.com.udea.plandeestudio.domain.repository.UnidadAcademicaRepository;
+import co.com.udea.plandeestudio.domain.repository.unidadacademica.UnidadAcademicaRepository;
 import co.com.udea.plandeestudio.persistence.crud.UnidadAcademicaCrud;
 import co.com.udea.plandeestudio.persistence.entity.UnidadAcademicaEntity;
+import co.com.udea.plandeestudio.persistence.mapper.PersonaMapper;
 import co.com.udea.plandeestudio.persistence.mapper.UnidadAcademicaMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -15,11 +16,13 @@ import java.util.Optional;
 public class UnidadAcademicaRepositoryImpl implements UnidadAcademicaRepository {
     private final UnidadAcademicaCrud persistence;
     private final UnidadAcademicaMapper mapper;
+    private final PersonaMapper mapperPersona;
 
     @Autowired
-    public UnidadAcademicaRepositoryImpl(UnidadAcademicaCrud persistence, UnidadAcademicaMapper mapper) {
+    public UnidadAcademicaRepositoryImpl(UnidadAcademicaCrud persistence, UnidadAcademicaMapper mapper, PersonaMapper mapperPersona) {
         this.persistence = persistence;
         this.mapper = mapper;
+        this.mapperPersona = mapperPersona;
     }
 
 
@@ -44,11 +47,19 @@ public class UnidadAcademicaRepositoryImpl implements UnidadAcademicaRepository 
         return Optional.of(mapper.toUnidadAcademica(persistence.save(entity)));
     }
 
-    /*  @Override
+    @Override
     public Optional<UnidadAcademica> update(UnidadAcademica unidadAcademica) {
-        UnidadAcademicaEntity entity = mapper.toUnidadAcademicaEntity(unidadAcademica);
-        return Optional.of(mapper.toUnidadAcademica(persistence.update(entity)));
-    }*/
+        Optional<UnidadAcademicaEntity> entity = persistence.findUnidadAcademicaEntitiesByCodigo(unidadAcademica.getCodigo());
+
+        if (!entity.isPresent()) {
+            return Optional.empty();
+        }
+
+        entity.get().setDescripcion(unidadAcademica.getDescripcion());
+        entity.get().setDecano(mapperPersona.toPersonaEntity(unidadAcademica.getDecano()));
+
+        return Optional.of(mapper.toUnidadAcademica(persistence.save(entity.get())));
+    }
 
     @Override
     public void delete(String codigo) {

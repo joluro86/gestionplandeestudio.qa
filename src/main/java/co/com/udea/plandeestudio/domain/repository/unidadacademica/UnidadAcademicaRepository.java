@@ -1,4 +1,4 @@
-package co.com.udea.plandeestudio.domain.repository;
+package co.com.udea.plandeestudio.domain.repository.unidadacademica;
 
 import co.com.udea.plandeestudio.domain.model.UnidadAcademica;
 
@@ -9,6 +9,6 @@ public interface UnidadAcademicaRepository {
     Optional<UnidadAcademica> getUnidadAcademicaByCodigo(String codigo);
     Optional<List<UnidadAcademica>> getAllUnidadAcademica();
     Optional<UnidadAcademica> save(UnidadAcademica unidadAcademica);
-    //Optional<UnidadAcademica> update(UnidadAcademica unidadAcademica);
+    Optional<UnidadAcademica> update(UnidadAcademica unidadAcademica);
     void delete(String codigo);
 }

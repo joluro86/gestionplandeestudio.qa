@@ -1,8 +1,8 @@
-package co.com.udea.plandeestudio.web.controller;
+package co.com.udea.plandeestudio.web.controller.unidadacademica;
 
 import co.com.udea.plandeestudio.domain.model.Mensaje;
 import co.com.udea.plandeestudio.domain.model.UnidadAcademica;
-import co.com.udea.plandeestudio.domain.service.UnidadAcademicaService;
+import co.com.udea.plandeestudio.domain.service.unidadacademica.UnidadAcademicaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -37,13 +37,14 @@ public class UnidadAcademicaRest {
         return new ResponseEntity<>(service.saveUnidadAcademica(unidadAcademica), HttpStatus.OK);
     }
 
-   /*  @PutMapping
+    @PutMapping
     public ResponseEntity<UnidadAcademica> updateUnidadAcademica(@RequestBody UnidadAcademica unidadAcademica) {
         return new ResponseEntity<>(service.updateUnidadAcademica(unidadAcademica), HttpStatus.OK);
-    }*/
+    }
 
     @DeleteMapping("/{codigo}")
     public ResponseEntity<Mensaje> deleteUnidadAcademicaByCodigo(@PathVariable String codigo) {
+        service.deleteUnidadAcademica(codigo);
         return new ResponseEntity<>(new Mensaje( "001", "Unidad academica eliminada"), HttpStatus.OK);
     }
 }
