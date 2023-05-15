@@ -9,7 +9,7 @@ public class DepartamentoEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(name = "codigo_departamento")
+    @Column(name = "codigo_departamento", unique = true)
     private Integer codigoDepartamento;
     private String nombre;
     private String direccion;
