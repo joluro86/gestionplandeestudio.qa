@@ -16,10 +16,8 @@ public class DepartamentoEntity {
     private String direccion;
     private String telefono;
     private String email;
-    @OneToOne
-    private PersonaEntity decano;
     @ManyToOne
-    @JoinColumn(name = "unidad_academica")
+    @JoinColumn(name = "unidad_academica_id", nullable = true)
     private UnidadAcademicaEntity unidadAcademica;
 
     public Integer getId() {
@@ -68,14 +66,6 @@ public class DepartamentoEntity {
 
     public void setEmail(String email) {
         this.email = email;
-    }
-
-    public PersonaEntity getDecano() {
-        return decano;
-    }
-
-    public void setDecano(PersonaEntity decano) {
-        this.decano = decano;
     }
 
     public UnidadAcademicaEntity getUnidadAcademica() {

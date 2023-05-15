@@ -2,9 +2,10 @@ package co.com.udea.plandeestudio.persistence.repositoryimpl.unidadacademica;
 
 import co.com.udea.plandeestudio.domain.model.UnidadAcademica;
 import co.com.udea.plandeestudio.domain.repository.unidadacademica.UnidadAcademicaRepository;
+import co.com.udea.plandeestudio.persistence.crud.PersonaCrud;
 import co.com.udea.plandeestudio.persistence.crud.UnidadAcademicaCrud;
+import co.com.udea.plandeestudio.persistence.entity.PersonaEntity;
 import co.com.udea.plandeestudio.persistence.entity.UnidadAcademicaEntity;
-import co.com.udea.plandeestudio.persistence.mapper.PersonaMapper;
 import co.com.udea.plandeestudio.persistence.mapper.UnidadAcademicaMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -16,13 +17,14 @@ import java.util.Optional;
 public class UnidadAcademicaRepositoryImpl implements UnidadAcademicaRepository {
     private final UnidadAcademicaCrud persistence;
     private final UnidadAcademicaMapper mapper;
-    private final PersonaMapper mapperPersona;
+    private final PersonaCrud personaCrud;
 
     @Autowired
-    public UnidadAcademicaRepositoryImpl(UnidadAcademicaCrud persistence, UnidadAcademicaMapper mapper, PersonaMapper mapperPersona) {
+    public UnidadAcademicaRepositoryImpl(UnidadAcademicaCrud persistence, UnidadAcademicaMapper mapper,
+                                         PersonaCrud personaCrud) {
         this.persistence = persistence;
         this.mapper = mapper;
-        this.mapperPersona = mapperPersona;
+        this.personaCrud = personaCrud;
     }
 
 
@@ -44,6 +46,8 @@ public class UnidadAcademicaRepositoryImpl implements UnidadAcademicaRepository 
     @Override
     public Optional<UnidadAcademica> save(UnidadAcademica unidadAcademica) {
         UnidadAcademicaEntity entity = mapper.toUnidadAcademicaEntity(unidadAcademica);
+        PersonaEntity decano = personaCrud.save(entity.getDecano());
+        entity.setDecano(decano);
         return Optional.of(mapper.toUnidadAcademica(persistence.save(entity)));
     }
 
@@ -55,8 +59,10 @@ public class UnidadAcademicaRepositoryImpl implements UnidadAcademicaRepository 
             return Optional.empty();
         }
 
+        PersonaEntity decano = personaCrud.findPersonaEntityByCedula(unidadAcademica.getDecano().getCedula());
+
         entity.get().setDescripcion(unidadAcademica.getDescripcion());
-        entity.get().setDecano(mapperPersona.toPersonaEntity(unidadAcademica.getDecano()));
+        entity.get().setDecano(decano);
 
         return Optional.of(mapper.toUnidadAcademica(persistence.save(entity.get())));
     }

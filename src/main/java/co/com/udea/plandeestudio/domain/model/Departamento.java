@@ -7,7 +7,6 @@ public class Departamento {
     private String direccion;
     private String telefono;
     private String email;
-    private Persona decano;
     private UnidadAcademica unidadAcademica;
 
 
@@ -49,14 +48,6 @@ public class Departamento {
 
     public void setEmail(String email) {
         this.email = email;
-    }
-
-    public Persona getDecano() {
-        return decano;
-    }
-
-    public void setDecano(Persona decano) {
-        this.decano = decano;
     }
 
     public UnidadAcademica getUnidadAcademica() {

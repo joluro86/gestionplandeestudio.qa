@@ -14,7 +14,8 @@ public class UnidadAcademicaEntity {
     @Column(unique = true)
     private String codigo;
     private String nombre;
-    @OneToOne
+    @ManyToOne
+    @JoinColumn(name = "decano_id")
     private PersonaEntity decano;
     private String actaEntidad;
     private String actaConsejoSuperior;

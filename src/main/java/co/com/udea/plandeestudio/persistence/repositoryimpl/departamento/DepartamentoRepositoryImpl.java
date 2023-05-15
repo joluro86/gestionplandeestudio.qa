@@ -5,7 +5,6 @@ import co.com.udea.plandeestudio.domain.repository.departamento.DepartamentoRepo
 import co.com.udea.plandeestudio.persistence.crud.DepartamentoCrud;
 import co.com.udea.plandeestudio.persistence.entity.DepartamentoEntity;
 import co.com.udea.plandeestudio.persistence.mapper.DepartamentoMapper;
-import co.com.udea.plandeestudio.persistence.mapper.PersonaMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -16,13 +15,11 @@ import java.util.Optional;
 public class DepartamentoRepositoryImpl implements DepartamentoRepository {
     private final DepartamentoCrud persistence;
     private final DepartamentoMapper mapper;
-    private final PersonaMapper mapperPersona;
 
     @Autowired
-    public DepartamentoRepositoryImpl (DepartamentoCrud persistence, DepartamentoMapper mapper, PersonaMapper mapperPersona) {
+    public DepartamentoRepositoryImpl (DepartamentoCrud persistence, DepartamentoMapper mapper) {
         this.persistence = persistence;
         this.mapper = mapper;
-        this.mapperPersona = mapperPersona;
     }
 
     @Override
@@ -59,7 +56,6 @@ public class DepartamentoRepositoryImpl implements DepartamentoRepository {
             return Optional.empty();
         }
 
-        entity.get().setDecano(mapperPersona.toPersonaEntity(departamento.getDecano()));
         entity.get().setDireccion(departamento.getDireccion());
         entity.get().setTelefono(departamento.getTelefono());
         entity.get().setEmail(departamento.getEmail());
