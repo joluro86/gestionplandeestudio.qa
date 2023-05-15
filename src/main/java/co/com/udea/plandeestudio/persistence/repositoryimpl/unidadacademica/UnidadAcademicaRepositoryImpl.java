@@ -46,7 +46,7 @@ public class UnidadAcademicaRepositoryImpl implements UnidadAcademicaRepository 
     @Override
     public Optional<UnidadAcademica> save(UnidadAcademica unidadAcademica) {
         UnidadAcademicaEntity entity = mapper.toUnidadAcademicaEntity(unidadAcademica);
-        PersonaEntity decano = personaCrud.save(entity.getDecano());
+        PersonaEntity decano = personaCrud.save(entity.getDecano()==null? new PersonaEntity(): entity.getDecano());
         entity.setDecano(decano);
         return Optional.of(mapper.toUnidadAcademica(persistence.save(entity)));
     }
