@@ -13,18 +13,15 @@ permissions:
 
 hooks:
   BeforeInstall:
-    - location: server_clear.sh
-      timeout: 300
-      runas: ec2-user
+    - location: Scripts/UnzipResourceBundle.sh
+    - location: Scripts/UnzipDataBundle.sh
   AfterInstall:
-    - location: fix_privileges.sh
-      timeout: 300
-      runas: ec2-user
+    - location: Scripts/RunResourceTests.sh
+      timeout: 180
   ApplicationStart:
-    - location: server_start.sh
-      timeout: 20
-      runas: ec2-user
-  ApplicationStop:
-    - location: server_stop.sh
-      timeout: 20
-      runas: ec2-user
+    - location: Scripts/RunFunctionalTests.sh
+      timeout: 3600
+  ValidateService:
+    - location: Scripts/MonitorService.sh
+      timeout: 3600
+      runas: codedeployuser
