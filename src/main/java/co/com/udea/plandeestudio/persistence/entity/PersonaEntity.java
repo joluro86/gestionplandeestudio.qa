@@ -1,6 +1,6 @@
 package co.com.udea.plandeestudio.persistence.entity;
 
-import jakarta.persistence.*;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "persona")
